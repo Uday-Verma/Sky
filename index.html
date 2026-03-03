@@ -3,35 +3,167 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ask Her Out</title>
-
-    <link rel="stylesheet" href="./style.css" />
+    <title>Nova Portfolio | Futuristic Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <div
-        class="tenor-gif-embed"
-        data-postid="22885016"
-        data-share-method="host"
-        data-aspect-ratio="1.04918"
-        data-width="100%"
-      >
-        <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a
-        >from
-        <a href="https://tenor.com/search/manja-stickers">Manja Stickers</a>
-      </div>
-      <script
-        type="text/javascript"
-        async
-        src="https://tenor.com/embed.js"
-      ></script>
-      <h1>Will You go out with me ?🤗</h1>
-      <p></p>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-      <div class="btn">
-        <a href="yes.html">Yes</a>
-        <a href="no1.html">No</a>
-      </div>
-    </div>
+    <header class="header glass reveal">
+      <div class="brand">NOVA<span>.</span></div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle glow mode">✨</button>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">Creative Developer • Problem Solver • Builder</p>
+        <h1>Designing modern digital experiences with futuristic energy.</h1>
+        <p class="subtitle">
+          I build sleek, high-performance web products that blend motion,
+          usability, and impactful storytelling.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-ghost">Let&apos;s Collaborate</a>
+        </div>
+
+        <div class="stats-grid glass">
+          <div>
+            <p class="stat-number" data-target="42">0</p>
+            <p class="stat-label">Projects Delivered</p>
+          </div>
+          <div>
+            <p class="stat-number" data-target="15">0</p>
+            <p class="stat-label">Awards & Recognitions</p>
+          </div>
+          <div>
+            <p class="stat-number" data-target="98">0</p>
+            <p class="stat-label">Client Satisfaction %</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section reveal">
+        <div class="section-heading">
+          <h2>Featured Projects</h2>
+          <p>Filter projects by category and open quick details.</p>
+        </div>
+
+        <div class="filters" role="tablist" aria-label="Project filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="ai">AI</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card glass tilt-card" data-category="ai">
+            <span class="chip">AI Platform</span>
+            <h3>Neural Analytics Dashboard</h3>
+            <p>
+              A real-time analytics interface with live insights, predictive
+              cards, and custom visualization pipelines.
+            </p>
+            <ul>
+              <li>React + TypeScript</li>
+              <li>Realtime charting</li>
+              <li>99.95% uptime deployment</li>
+            </ul>
+            <button class="mini-btn" data-details="AI analytics dashboard with live metrics and custom ML forecasting widgets.">Quick View</button>
+          </article>
+
+          <article class="project-card glass tilt-card" data-category="web">
+            <span class="chip">Web App</span>
+            <h3>Orbit Task Command Center</h3>
+            <p>
+              A gamified productivity workspace with collaborative boards,
+              timeline automation, and deep focus tools.
+            </p>
+            <ul>
+              <li>Node.js + PostgreSQL</li>
+              <li>Role-based access controls</li>
+              <li>60% workflow acceleration</li>
+            </ul>
+            <button class="mini-btn" data-details="Collaborative command center with automation workflows and productivity insights.">Quick View</button>
+          </article>
+
+          <article class="project-card glass tilt-card" data-category="mobile">
+            <span class="chip">Mobile + IoT</span>
+            <h3>Pulse Home Companion</h3>
+            <p>
+              A cross-platform smart home app that monitors energy, security,
+              and environment metrics from one futuristic interface.
+            </p>
+            <ul>
+              <li>Flutter + Firebase</li>
+              <li>Smart automations</li>
+              <li>40K+ active sessions</li>
+            </ul>
+            <button class="mini-btn" data-details="Cross-platform IoT experience with alerts, energy insights, and adaptive automations.">Quick View</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="achievements" class="section reveal">
+        <div class="section-heading">
+          <h2>Achievements</h2>
+          <p>Click an item to mark it as highlighted.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item glass interactive-item">
+            <h3>Global Hackathon Winner</h3>
+            <p>
+              Secured 1st place among 1,200+ teams by building an AI-driven
+              civic response platform in 36 hours.
+            </p>
+          </article>
+          <article class="timeline-item glass interactive-item">
+            <h3>Top Open Source Contributor</h3>
+            <p>
+              Delivered 150+ merged contributions across developer tooling and
+              accessibility-focused UI libraries.
+            </p>
+          </article>
+          <article class="timeline-item glass interactive-item">
+            <h3>Speaker & Mentor</h3>
+            <p>
+              Presented at 8 tech communities and mentored aspiring developers
+              on web performance and product engineering.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact reveal glass">
+        <h2>Let&apos;s build something extraordinary.</h2>
+        <p>
+          Open to freelance projects, full-time roles, and creative
+          collaborations.
+        </p>
+        <a class="btn btn-primary" href="mailto:hello@novaportfolio.dev"
+          >hello@novaportfolio.dev</a
+        >
+      </section>
+    </main>
+
+    <dialog id="project-dialog" class="glass">
+      <h3 id="dialog-title">Project details</h3>
+      <p id="dialog-text"></p>
+      <button id="close-dialog" class="btn btn-primary">Close</button>
+    </dialog>
+
+    <script src="script.js"></script>
   </body>
 </html>
