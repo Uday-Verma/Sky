@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nova Portfolio | Futuristic Creator</title>
+    <title>Your Name | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -16,101 +16,83 @@
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
     <header class="header glass reveal">
-      <div class="brand">NOVA<span>.</span></div>
+      <a class="brand" href="#home">YOUR<span>PORTFOLIO</span></a>
       <nav>
         <a href="#projects">Projects</a>
         <a href="#achievements">Achievements</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button id="theme-toggle" class="icon-btn" aria-label="Toggle glow mode">✨</button>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">◐</button>
     </header>
 
     <main>
-      <section class="hero reveal">
-        <p class="eyebrow">Creative Developer • Problem Solver • Builder</p>
-        <h1>Designing modern digital experiences with futuristic energy.</h1>
+      <section id="home" class="hero reveal">
+        <p class="eyebrow">Designer • Developer • Creator</p>
+        <h1>I build sleek, modern, high-impact digital products.</h1>
         <p class="subtitle">
-          I build sleek, high-performance web products that blend motion,
-          usability, and impactful storytelling.
+          Welcome to my portfolio. This space highlights my best projects,
+          achievements, and the results I deliver through design + engineering.
         </p>
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-ghost">Let&apos;s Collaborate</a>
-        </div>
-
-        <div class="stats-grid glass">
-          <div>
-            <p class="stat-number" data-target="42">0</p>
-            <p class="stat-label">Projects Delivered</p>
-          </div>
-          <div>
-            <p class="stat-number" data-target="15">0</p>
-            <p class="stat-label">Awards & Recognitions</p>
-          </div>
-          <div>
-            <p class="stat-number" data-target="98">0</p>
-            <p class="stat-label">Client Satisfaction %</p>
-          </div>
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-ghost">Contact Me</a>
         </div>
       </section>
 
       <section id="projects" class="section reveal">
         <div class="section-heading">
-          <h2>Featured Projects</h2>
-          <p>Filter projects by category and open quick details.</p>
+          <h2>Selected Projects</h2>
+          <p>Hand-picked work focused on product quality and measurable impact.</p>
         </div>
 
-        <div class="filters" role="tablist" aria-label="Project filters">
+        <div class="filters" role="tablist" aria-label="Project categories">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="ai">AI</button>
-          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="frontend">Frontend</button>
+          <button class="filter-btn" data-filter="fullstack">Full Stack</button>
           <button class="filter-btn" data-filter="mobile">Mobile</button>
         </div>
 
         <div class="project-grid">
-          <article class="project-card glass tilt-card" data-category="ai">
-            <span class="chip">AI Platform</span>
-            <h3>Neural Analytics Dashboard</h3>
+          <article class="project-card glass tilt-card reveal" data-category="frontend">
+            <p class="project-index">01</p>
+            <h3>FinEdge Dashboard</h3>
             <p>
-              A real-time analytics interface with live insights, predictive
-              cards, and custom visualization pipelines.
+              A premium analytics dashboard for finance teams with interactive charts,
+              alerting workflows, and role-based insights.
             </p>
-            <ul>
-              <li>React + TypeScript</li>
-              <li>Realtime charting</li>
-              <li>99.95% uptime deployment</li>
-            </ul>
-            <button class="mini-btn" data-details="AI analytics dashboard with live metrics and custom ML forecasting widgets.">Quick View</button>
+            <div class="tags"><span>React</span><span>TypeScript</span><span>D3</span></div>
+            <div class="card-actions">
+              <a href="#" class="mini-btn">Live Demo</a>
+              <a href="#" class="mini-btn">GitHub</a>
+            </div>
           </article>
 
-          <article class="project-card glass tilt-card" data-category="web">
-            <span class="chip">Web App</span>
-            <h3>Orbit Task Command Center</h3>
+          <article class="project-card glass tilt-card reveal" data-category="fullstack">
+            <p class="project-index">02</p>
+            <h3>StudioFlow Platform</h3>
             <p>
-              A gamified productivity workspace with collaborative boards,
-              timeline automation, and deep focus tools.
+              A collaboration suite for creative teams with project tracking,
+              approvals, and automated delivery pipelines.
             </p>
-            <ul>
-              <li>Node.js + PostgreSQL</li>
-              <li>Role-based access controls</li>
-              <li>60% workflow acceleration</li>
-            </ul>
-            <button class="mini-btn" data-details="Collaborative command center with automation workflows and productivity insights.">Quick View</button>
+            <div class="tags"><span>Node.js</span><span>PostgreSQL</span><span>Redis</span></div>
+            <div class="card-actions">
+              <a href="#" class="mini-btn">Live Demo</a>
+              <a href="#" class="mini-btn">GitHub</a>
+            </div>
           </article>
 
-          <article class="project-card glass tilt-card" data-category="mobile">
-            <span class="chip">Mobile + IoT</span>
-            <h3>Pulse Home Companion</h3>
+          <article class="project-card glass tilt-card reveal" data-category="mobile">
+            <p class="project-index">03</p>
+            <h3>PulseFit App</h3>
             <p>
-              A cross-platform smart home app that monitors energy, security,
-              and environment metrics from one futuristic interface.
+              A sleek fitness companion with adaptive plans, progress analytics,
+              and social accountability features.
             </p>
-            <ul>
-              <li>Flutter + Firebase</li>
-              <li>Smart automations</li>
-              <li>40K+ active sessions</li>
-            </ul>
-            <button class="mini-btn" data-details="Cross-platform IoT experience with alerts, energy insights, and adaptive automations.">Quick View</button>
+            <div class="tags"><span>Flutter</span><span>Firebase</span><span>REST API</span></div>
+            <div class="card-actions">
+              <a href="#" class="mini-btn">Live Demo</a>
+              <a href="#" class="mini-btn">GitHub</a>
+            </div>
           </article>
         </div>
       </section>
@@ -118,51 +100,34 @@
       <section id="achievements" class="section reveal">
         <div class="section-heading">
           <h2>Achievements</h2>
-          <p>Click an item to mark it as highlighted.</p>
+          <p>Milestones that reflect quality, consistency, and leadership.</p>
         </div>
 
-        <div class="timeline">
-          <article class="timeline-item glass interactive-item">
-            <h3>Global Hackathon Winner</h3>
-            <p>
-              Secured 1st place among 1,200+ teams by building an AI-driven
-              civic response platform in 36 hours.
-            </p>
+        <div class="achievement-grid">
+          <article class="achievement-card glass interactive-item">
+            <h3>Hackathon Winner</h3>
+            <p>Won 1st place among 1,000+ teams with an AI civic-tech solution.</p>
           </article>
-          <article class="timeline-item glass interactive-item">
-            <h3>Top Open Source Contributor</h3>
-            <p>
-              Delivered 150+ merged contributions across developer tooling and
-              accessibility-focused UI libraries.
-            </p>
+          <article class="achievement-card glass interactive-item">
+            <h3>Open Source Impact</h3>
+            <p>Contributed major improvements to developer tools and UI libraries.</p>
           </article>
-          <article class="timeline-item glass interactive-item">
+          <article class="achievement-card glass interactive-item">
             <h3>Speaker & Mentor</h3>
-            <p>
-              Presented at 8 tech communities and mentored aspiring developers
-              on web performance and product engineering.
-            </p>
+            <p>Mentored junior devs and spoke at product engineering meetups.</p>
           </article>
         </div>
       </section>
 
       <section id="contact" class="section contact reveal glass">
-        <h2>Let&apos;s build something extraordinary.</h2>
-        <p>
-          Open to freelance projects, full-time roles, and creative
-          collaborations.
-        </p>
-        <a class="btn btn-primary" href="mailto:hello@novaportfolio.dev"
-          >hello@novaportfolio.dev</a
-        >
+        <h2>Let&apos;s build something exceptional.</h2>
+        <p>Open for freelance work, collaborations, and full-time opportunities.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:youremail@example.com">youremail@example.com</a>
+          <a class="btn btn-ghost" href="#">LinkedIn</a>
+        </div>
       </section>
     </main>
-
-    <dialog id="project-dialog" class="glass">
-      <h3 id="dialog-title">Project details</h3>
-      <p id="dialog-text"></p>
-      <button id="close-dialog" class="btn btn-primary">Close</button>
-    </dialog>
 
     <script src="script.js"></script>
   </body>

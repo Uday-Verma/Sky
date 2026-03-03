@@ -2,12 +2,7 @@ const revealElements = document.querySelectorAll('.reveal');
 const filterButtons = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
 const timelineItems = document.querySelectorAll('.interactive-item');
-const statNumbers = document.querySelectorAll('.stat-number');
 const themeToggle = document.getElementById('theme-toggle');
-const dialog = document.getElementById('project-dialog');
-const dialogTitle = document.getElementById('dialog-title');
-const dialogText = document.getElementById('dialog-text');
-const closeDialog = document.getElementById('close-dialog');
 
 const observer = new IntersectionObserver(
   (entries) => {
@@ -18,28 +13,26 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.2 }
+  { threshold: 0.16 }
 );
 
 revealElements.forEach((element) => observer.observe(element));
-
-const tiltCards = document.querySelectorAll('.tilt-card');
 
 function applyTilt(event, card) {
   const rect = card.getBoundingClientRect();
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
 
-  const rotateX = (y / rect.height - 0.5) * -10;
-  const rotateY = (x / rect.width - 0.5) * 12;
+  const rotateX = (y / rect.height - 0.5) * -8;
+  const rotateY = (x / rect.width - 0.5) * 10;
 
-  card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 }
 
-tiltCards.forEach((card) => {
+document.querySelectorAll('.tilt-card').forEach((card) => {
   card.addEventListener('mousemove', (event) => applyTilt(event, card));
   card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(700px) rotateX(0) rotateY(0)';
+    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
   });
 });
 
@@ -51,34 +44,10 @@ filterButtons.forEach((button) => {
     button.classList.add('active');
 
     projectCards.forEach((card) => {
-      const shouldShow = filter === 'all' || card.dataset.category === filter;
-      card.style.display = shouldShow ? 'block' : 'none';
+      const visible = filter === 'all' || card.dataset.category === filter;
+      card.classList.toggle('is-hidden', !visible);
     });
   });
-});
-
-document.querySelectorAll('.mini-btn').forEach((button) => {
-  button.addEventListener('click', () => {
-    const card = button.closest('.project-card');
-    dialogTitle.textContent = card.querySelector('h3').textContent;
-    dialogText.textContent = button.dataset.details;
-    dialog.showModal();
-  });
-});
-
-closeDialog.addEventListener('click', () => dialog.close());
-
-dialog.addEventListener('click', (event) => {
-  const bounds = dialog.getBoundingClientRect();
-  const isOutside =
-    event.clientX < bounds.left ||
-    event.clientX > bounds.right ||
-    event.clientY < bounds.top ||
-    event.clientY > bounds.bottom;
-
-  if (isOutside) {
-    dialog.close();
-  }
 });
 
 timelineItems.forEach((item) => {
@@ -88,33 +57,12 @@ timelineItems.forEach((item) => {
   });
 });
 
-function animateCounter(element) {
-  const target = Number(element.dataset.target);
-  const duration = 1100;
-  let start = null;
-
-  function step(timestamp) {
-    if (!start) start = timestamp;
-    const progress = Math.min((timestamp - start) / duration, 1);
-    element.textContent = Math.floor(progress * target);
-
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    }
-  }
-
-  requestAnimationFrame(step);
-}
-
-statNumbers.forEach((stat) => animateCounter(stat));
-
 themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('glow-mode');
+  document.body.classList.toggle('light-mode');
 });
 
 const canvas = document.getElementById('particle-canvas');
 const context = canvas.getContext('2d');
-
 let particles = [];
 
 function setCanvasSize() {
@@ -123,19 +71,19 @@ function setCanvasSize() {
 }
 
 function createParticles() {
-  const count = Math.min(90, Math.floor(window.innerWidth / 14));
+  const count = Math.min(85, Math.floor(window.innerWidth / 15));
   particles = Array.from({ length: count }, () => ({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     size: Math.random() * 2 + 0.4,
-    speedX: (Math.random() - 0.5) * 0.35,
-    speedY: (Math.random() - 0.5) * 0.35,
+    speedX: (Math.random() - 0.5) * 0.3,
+    speedY: (Math.random() - 0.5) * 0.3,
   }));
 }
 
 function drawParticles() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = 'rgba(174, 231, 255, 0.7)';
+  context.fillStyle = 'rgba(174, 231, 255, 0.55)';
 
   particles.forEach((particle) => {
     particle.x += particle.speedX;
