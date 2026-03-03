@@ -116,6 +116,17 @@ nav a:hover {
 
 .hero {
   padding: 6.1rem 0 3.7rem;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.hero-image {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: 1rem;
 }
 
 .eyebrow {
@@ -229,6 +240,16 @@ h1 {
   transform-style: preserve-3d;
 }
 
+.project-image,
+.achievement-image {
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--border);
+}
+
 .project-card:hover,
 .achievement-card:hover {
   border-color: rgba(124, 231, 255, 0.5);
@@ -304,6 +325,12 @@ h1 {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
