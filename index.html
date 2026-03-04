@@ -3,173 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Name | Portfolio</title>
+    <title>FitQuest | Functional MVP Prototype</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Orbitron:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="particle-canvas" aria-hidden="true"></canvas>
-
-    <header class="header glass reveal">
-      <a class="brand" href="#home">YOUR<span>PORTFOLIO</span></a>
+    <header class="topbar">
+      <a class="brand" href="#home">Fit<span>Quest</span></a>
       <nav>
-        <a href="#projects">Projects</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#contact">Contact</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#log-workout">Log Workout</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#profile">Profile</a>
       </nav>
-      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">◐</button>
+      <button id="reset-btn" class="btn btn-ghost btn-sm" type="button">Reset Demo</button>
     </header>
 
     <main>
-      <section id="home" class="hero reveal">
+      <section id="home" class="hero">
         <div>
-          <p class="eyebrow">Designer • Developer • Creator</p>
-          <h1>I build sleek, modern, high-impact digital products.</h1>
-          <p class="subtitle">
-            Welcome to my portfolio. This space highlights my best projects,
-            achievements, and the results I deliver through design + engineering.
+          <p class="kicker">LEVEL UP YOUR FITNESS, COMPETE WITH FRIENDS</p>
+          <h1>Every workout gives XP. Every XP gets you closer to beating your friends.</h1>
+          <p class="muted">
+            This is a functional FitQuest MVP web prototype with persistent local data,
+            live leveling, streak tracking, badge unlocks, and friend leaderboard updates.
           </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-ghost">Contact Me</a>
+          <div class="actions">
+            <a href="#log-workout" class="btn">Log a Workout</a>
+            <a href="docs/fitquest-prd.md" class="btn btn-ghost">Read PRD</a>
           </div>
         </div>
-        <img
-          class="hero-image glass"
-          src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=80"
-          alt="Workspace setup representing portfolio creator"
-        />
+
+        <article class="card">
+          <h3>Current Progress</h3>
+          <p class="level-line"><strong id="hero-level">Level 0</strong><span id="hero-xp">0 XP</span></p>
+          <div class="progress"><span id="hero-progress-bar" style="width: 0%"></span></div>
+          <p class="muted" id="hero-next">100 XP to Level 1</p>
+          <div class="mini-stats">
+            <span><strong id="hero-streak">0</strong> day streak</span>
+            <span><strong id="hero-workouts">0</strong> workouts</span>
+            <span><strong id="hero-hours">0.0</strong> hours</span>
+          </div>
+        </article>
       </section>
 
-      <section id="projects" class="section reveal">
-        <div class="section-heading">
-          <h2>Selected Projects</h2>
-          <p>Hand-picked work focused on product quality and measurable impact.</p>
+      <section id="dashboard" class="section">
+        <h2>Dashboard</h2>
+        <div class="grid four">
+          <article class="card stat"><p>Total XP</p><h3 id="total-xp">0</h3></article>
+          <article class="card stat"><p>Current Level</p><h3 id="current-level">0</h3></article>
+          <article class="card stat"><p>Current Streak</p><h3 id="current-streak">0 days</h3></article>
+          <article class="card stat"><p>Total Workouts</p><h3 id="total-workouts">0</h3></article>
         </div>
 
-        <div class="filters" role="tablist" aria-label="Project categories">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="frontend">Frontend</button>
-          <button class="filter-btn" data-filter="fullstack">Full Stack</button>
-          <button class="filter-btn" data-filter="mobile">Mobile</button>
-        </div>
+        <article class="card mt">
+          <h3>Recent Workouts</h3>
+          <ul id="recent-workouts" class="list"></ul>
+        </article>
+      </section>
 
-        <div class="project-grid">
-          <article class="project-card glass tilt-card reveal" data-category="frontend">
-            <img
-              class="project-image"
-              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"
-              alt="Dashboard code and interface preview"
-              loading="lazy"
-            />
-            <p class="project-index">01</p>
-            <h3>FinEdge Dashboard</h3>
-            <p>
-              A premium analytics dashboard for finance teams with interactive charts,
-              alerting workflows, and role-based insights.
-            </p>
-            <div class="tags"><span>React</span><span>TypeScript</span><span>D3</span></div>
-            <div class="card-actions">
-              <a href="#" class="mini-btn">Live Demo</a>
-              <a href="#" class="mini-btn">GitHub</a>
-            </div>
-          </article>
+      <section id="log-workout" class="section">
+        <h2>Log Workout</h2>
+        <div class="grid two">
+          <form id="workout-form" class="card form-grid">
+            <label>Workout type
+              <select id="workout-type" required>
+                <option value="gym">Gym session</option>
+                <option value="cardio">Cardio</option>
+                <option value="custom">Custom</option>
+              </select>
+            </label>
 
-          <article class="project-card glass tilt-card reveal" data-category="fullstack">
-            <img
-              class="project-image"
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
-              alt="Team collaborating on full stack product"
-              loading="lazy"
-            />
-            <p class="project-index">02</p>
-            <h3>StudioFlow Platform</h3>
-            <p>
-              A collaboration suite for creative teams with project tracking,
-              approvals, and automated delivery pipelines.
-            </p>
-            <div class="tags"><span>Node.js</span><span>PostgreSQL</span><span>Redis</span></div>
-            <div class="card-actions">
-              <a href="#" class="mini-btn">Live Demo</a>
-              <a href="#" class="mini-btn">GitHub</a>
-            </div>
-          </article>
+            <label>Duration (minutes)
+              <input id="duration" type="number" min="1" max="600" required value="45" />
+            </label>
 
-          <article class="project-card glass tilt-card reveal" data-category="mobile">
-            <img
-              class="project-image"
-              src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80"
-              alt="Mobile app interface shown on smartphone"
-              loading="lazy"
-            />
-            <p class="project-index">03</p>
-            <h3>PulseFit App</h3>
-            <p>
-              A sleek fitness companion with adaptive plans, progress analytics,
-              and social accountability features.
-            </p>
-            <div class="tags"><span>Flutter</span><span>Firebase</span><span>REST API</span></div>
-            <div class="card-actions">
-              <a href="#" class="mini-btn">Live Demo</a>
-              <a href="#" class="mini-btn">GitHub</a>
-            </div>
+            <label>Date
+              <input id="workout-date" type="date" required />
+            </label>
+
+            <label>Notes (optional, max 100 chars)
+              <textarea id="notes" maxlength="100" rows="3" placeholder="Leg day + core"></textarea>
+            </label>
+
+            <p id="xp-preview" class="muted">This workout will earn ~30 XP</p>
+            <button class="btn" type="submit">Save Workout</button>
+          </form>
+
+          <article class="card">
+            <h3>Live Feedback</h3>
+            <p id="save-message" class="muted">Log your first workout to start earning XP.</p>
+            <div id="badge-unlocks" class="chip-wrap"></div>
           </article>
         </div>
       </section>
 
-      <section id="achievements" class="section reveal">
-        <div class="section-heading">
-          <h2>Achievements</h2>
-          <p>Milestones that reflect quality, consistency, and leadership.</p>
-        </div>
-
-        <div class="achievement-grid">
-          <article class="achievement-card glass interactive-item">
-            <img
-              class="achievement-image"
-              src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80"
-              alt="Award celebration moment"
-              loading="lazy"
-            />
-            <h3>Hackathon Winner</h3>
-            <p>Won 1st place among 1,000+ teams with an AI civic-tech solution.</p>
-          </article>
-          <article class="achievement-card glass interactive-item">
-            <img
-              class="achievement-image"
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
-              alt="Open-source collaboration board"
-              loading="lazy"
-            />
-            <h3>Open Source Impact</h3>
-            <p>Contributed major improvements to developer tools and UI libraries.</p>
-          </article>
-          <article class="achievement-card glass interactive-item">
-            <img
-              class="achievement-image"
-              src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80"
-              alt="Public speaking and mentoring session"
-              loading="lazy"
-            />
-            <h3>Speaker & Mentor</h3>
-            <p>Mentored junior devs and spoke at product engineering meetups.</p>
-          </article>
-        </div>
+      <section id="leaderboard" class="section">
+        <h2>Friends Leaderboard</h2>
+        <article class="card">
+          <ol id="leaderboard-list" class="board"></ol>
+        </article>
       </section>
 
-      <section id="contact" class="section contact reveal glass">
-        <h2>Let&apos;s build something exceptional.</h2>
-        <p>Open for freelance work, collaborations, and full-time opportunities.</p>
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="udayverma475@gmail.com">udayverma475@gmail.com</a>           <a class="btn btn-ghost" href="#">LinkedIn</a>
+      <section id="profile" class="section">
+        <h2>Profile</h2>
+        <div class="grid two">
+          <article class="card">
+            <p class="muted">Username</p>
+            <h3 id="profile-username">you</h3>
+            <p class="muted">Friend Code: <strong id="friend-code">FIT-XXXX</strong></p>
+            <label class="toggle">
+              <input id="privacy-toggle" type="checkbox" />
+              <span>Make my workout log public</span>
+            </label>
+            <p id="privacy-status" class="muted">Your workout details are private.</p>
+          </article>
+
+          <article class="card">
+            <h3>Achievements</h3>
+            <div id="achievement-grid" class="achievements"></div>
+          </article>
         </div>
       </section>
     </main>
+
+    <footer>
+      <p>Functional FitQuest prototype · Local persistence via browser storage.</p>
+    </footer>
 
     <script src="script.js"></script>
   </body>
