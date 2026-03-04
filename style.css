@@ -32,6 +32,7 @@ body {
   padding: 1rem 0;
   backdrop-filter: blur(10px);
 }
+.brand span { color: var(--secondary); }
 
 .brand {
   color: var(--text);
@@ -90,6 +91,7 @@ h3 { margin: 0.2rem 0 0.8rem; }
   border-radius: 12px;
   padding: 1rem;
 }
+.btn-sm { padding: 0.5rem 0.8rem; }
 
 .level-line {
   display: flex;
