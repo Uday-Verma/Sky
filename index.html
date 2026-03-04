@@ -13,36 +13,33 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="fx-canvas" aria-hidden="true"></canvas>
-
-    <header class="topbar glass" data-reveal>
+    <header class="topbar">
       <a class="brand" href="#home">Fit<span>Quest</span></a>
       <nav>
         <a href="#dashboard">Dashboard</a>
         <a href="#log-workout">Log Workout</a>
         <a href="#leaderboard">Leaderboard</a>
         <a href="#profile">Profile</a>
-        <a href="#blueprint">Blueprint</a>
       </nav>
       <button id="reset-btn" class="btn btn-ghost btn-sm" type="button">Reset Demo</button>
     </header>
 
     <main>
-      <section id="home" class="hero" data-reveal>
+      <section id="home" class="hero">
         <div>
-          <p class="kicker">NEXT-GEN FITNESS GAMIFICATION</p>
-          <h1>Every workout earns XP. Every XP powers your rise on one unified page.</h1>
+          <p class="kicker">LEVEL UP YOUR FITNESS, COMPETE WITH FRIENDS</p>
+          <h1>Every workout gives XP. Every XP gets you closer to beating your friends.</h1>
           <p class="muted">
-            A futuristic, functional FitQuest prototype with persistent workout history,
-            dynamic levels, streak bonuses, achievements, privacy mode, and leaderboard updates.
+            This is a functional FitQuest MVP web prototype with persistent local data,
+            live leveling, streak tracking, badge unlocks, and friend leaderboard updates.
           </p>
           <div class="actions">
             <a href="#log-workout" class="btn">Log a Workout</a>
-            <a href="#blueprint" class="btn btn-ghost">View Build Plan</a>
+            <a href="docs/fitquest-prd.md" class="btn btn-ghost">Read PRD</a>
           </div>
         </div>
 
-        <article class="card glass neon" data-tilt>
+        <article class="card">
           <h3>Current Progress</h3>
           <p class="level-line"><strong id="hero-level">Level 0</strong><span id="hero-xp">0 XP</span></p>
           <div class="progress"><span id="hero-progress-bar" style="width: 0%"></span></div>
@@ -55,25 +52,25 @@
         </article>
       </section>
 
-      <section id="dashboard" class="section" data-reveal>
+      <section id="dashboard" class="section">
         <h2>Dashboard</h2>
         <div class="grid four">
-          <article class="card stat glass" data-tilt><p>Total XP</p><h3 id="total-xp">0</h3></article>
-          <article class="card stat glass" data-tilt><p>Current Level</p><h3 id="current-level">0</h3></article>
-          <article class="card stat glass" data-tilt><p>Current Streak</p><h3 id="current-streak">0 days</h3></article>
-          <article class="card stat glass" data-tilt><p>Total Workouts</p><h3 id="total-workouts">0</h3></article>
+          <article class="card stat"><p>Total XP</p><h3 id="total-xp">0</h3></article>
+          <article class="card stat"><p>Current Level</p><h3 id="current-level">0</h3></article>
+          <article class="card stat"><p>Current Streak</p><h3 id="current-streak">0 days</h3></article>
+          <article class="card stat"><p>Total Workouts</p><h3 id="total-workouts">0</h3></article>
         </div>
 
-        <article class="card glass mt" data-reveal>
+        <article class="card mt">
           <h3>Recent Workouts</h3>
           <ul id="recent-workouts" class="list"></ul>
         </article>
       </section>
 
-      <section id="log-workout" class="section" data-reveal>
+      <section id="log-workout" class="section">
         <h2>Log Workout</h2>
         <div class="grid two">
-          <form id="workout-form" class="card glass form-grid" data-tilt>
+          <form id="workout-form" class="card form-grid">
             <label>Workout type
               <select id="workout-type" required>
                 <option value="gym">Gym session</option>
@@ -98,7 +95,7 @@
             <button class="btn" type="submit">Save Workout</button>
           </form>
 
-          <article class="card glass" data-tilt>
+          <article class="card">
             <h3>Live Feedback</h3>
             <p id="save-message" class="muted">Log your first workout to start earning XP.</p>
             <div id="badge-unlocks" class="chip-wrap"></div>
@@ -106,17 +103,17 @@
         </div>
       </section>
 
-      <section id="leaderboard" class="section" data-reveal>
+      <section id="leaderboard" class="section">
         <h2>Friends Leaderboard</h2>
-        <article class="card glass">
+        <article class="card">
           <ol id="leaderboard-list" class="board"></ol>
         </article>
       </section>
 
-      <section id="profile" class="section" data-reveal>
+      <section id="profile" class="section">
         <h2>Profile</h2>
         <div class="grid two">
-          <article class="card glass" data-tilt>
+          <article class="card">
             <p class="muted">Username</p>
             <h3 id="profile-username">you</h3>
             <p class="muted">Friend Code: <strong id="friend-code">FIT-XXXX</strong></p>
@@ -127,25 +124,16 @@
             <p id="privacy-status" class="muted">Your workout details are private.</p>
           </article>
 
-          <article class="card glass" data-tilt>
+          <article class="card">
             <h3>Achievements</h3>
             <div id="achievement-grid" class="achievements"></div>
           </article>
         </div>
       </section>
-
-      <section id="blueprint" class="section" data-reveal>
-        <h2>Single-Page Build Blueprint</h2>
-        <div class="grid three">
-          <article class="card glass"><h3>Foundation</h3><p class="muted">Auth + schema setup, friend code generation, and routing model designed as a single-page flow.</p></article>
-          <article class="card glass"><h3>Core Loop</h3><p class="muted">Log workout → calculate XP → update streak + level → unlock badges → re-rank leaderboard.</p></article>
-          <article class="card glass"><h3>Scale Path</h3><p class="muted">Swap local storage with Supabase APIs while preserving current UI and interaction contracts.</p></article>
-        </div>
-      </section>
     </main>
 
     <footer>
-      <p>Futuristic FitQuest single-page prototype · local persistence via browser storage.</p>
+      <p>Functional FitQuest prototype · Local persistence via browser storage.</p>
     </footer>
 
     <script src="script.js"></script>

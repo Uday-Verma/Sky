@@ -46,7 +46,12 @@ const el = {
 init();
 
 function init() {
-  el.date.value = state.workouts.length ? state.workouts[0].workoutDate : todayISO();
+  if (!state.workouts.length) {
+    el.date.value = todayISO();
+  } else {
+    el.date.value = state.workouts[0].workoutDate;
+  }
+
   el.privacyToggle.checked = state.workoutLogPublic;
   el.profileUsername.textContent = state.username;
   el.friendCode.textContent = state.friendCode;
@@ -64,12 +69,8 @@ function init() {
     location.reload();
   });
 
-  setupReveal();
-  setupTilt();
-  setupFxBackground();
-
   updatePreview();
-  render(true);
+  render();
 }
 
 function loadState() {
@@ -99,12 +100,10 @@ function persist() {
 function updatePreview() {
   const duration = Number(el.duration.value);
   const type = el.type.value;
-
   if (!Number.isFinite(duration) || duration < 1) {
     el.xpPreview.textContent = 'Enter a valid duration to preview XP.';
     return;
   }
-
   const xp = calculateXP(type, duration);
   el.xpPreview.textContent = `This workout will earn ~${xp} XP`;
 }
@@ -126,13 +125,12 @@ function saveWorkout(event) {
     return;
   }
 
-  const isNewDate = !hasWorkoutOnDate(state.workouts, workoutDate);
+  const xp = calculateXP(type, duration);
   const streak = updateStreak(state.lastWorkoutDate, workoutDate, state.currentStreak);
-  const baseXP = calculateXP(type, duration);
-  const streakBonus = streak >= 3 && isNewDate ? 5 : 0;
-  const totalEarned = baseXP + streakBonus;
+  const streakBonus = streak >= 3 && !hasWorkoutOnDate(state.workouts, workoutDate) ? 5 : 0;
+  const totalEarned = xp + streakBonus;
 
-  const prevLevel = state.level;
+  const previousLevel = state.level;
 
   state.workouts.unshift({ type, duration, workoutDate, notes, xpEarned: totalEarned });
   state.totalXP += totalEarned;
@@ -149,18 +147,18 @@ function saveWorkout(event) {
 
   const parts = [`Saved! +${totalEarned} XP`];
   if (streakBonus) parts.push('(includes +5 streak bonus)');
-  if (state.level > prevLevel) parts.push(`🎉 Level up to ${state.level}!`);
+  if (state.level > previousLevel) parts.push(`🎉 Level up to ${state.level}!`);
   el.saveMessage.textContent = parts.join(' ');
 
   renderBadgeChips(newlyUnlocked);
   el.notes.value = '';
 }
 
-function render(initial = false) {
-  animateCount(el.totalXP, Number(el.totalXP.textContent) || 0, state.totalXP, initial ? 0 : 300);
-  animateCount(el.currentLevel, Number(el.currentLevel.textContent) || 0, state.level, initial ? 0 : 300);
+function render() {
+  el.totalXP.textContent = String(state.totalXP);
+  el.currentLevel.textContent = String(state.level);
   el.currentStreak.textContent = `${state.currentStreak} days`;
-  animateCount(el.totalWorkouts, Number(el.totalWorkouts.textContent) || 0, state.totalWorkouts, initial ? 0 : 300);
+  el.totalWorkouts.textContent = String(state.totalWorkouts);
 
   el.heroLevel.textContent = `Level ${state.level}`;
   el.heroXP.textContent = `${state.totalXP} XP`;
@@ -189,7 +187,6 @@ function render(initial = false) {
 function renderRecentWorkouts() {
   el.recentWorkouts.innerHTML = '';
   const recent = state.workouts.slice(0, 5);
-
   if (!recent.length) {
     el.recentWorkouts.innerHTML = '<li class="muted">No workouts yet. Log your first one.</li>';
     return;
@@ -240,7 +237,6 @@ function renderBadgeChips(ids) {
   el.badgeUnlocks.innerHTML = '';
   ids.forEach((id) => {
     const badge = BADGES.find((b) => b.id === id);
-    if (!badge) return;
     const chip = document.createElement('span');
     chip.className = 'chip';
     chip.textContent = `Unlocked: ${badge.label}`;
@@ -271,6 +267,7 @@ function calculateLevel(totalXP) {
 
 function updateStreak(lastWorkoutDate, nextWorkoutDate, currentStreak) {
   if (!lastWorkoutDate) return 1;
+
   const diff = dayDiff(lastWorkoutDate, nextWorkoutDate);
   if (diff === 0) return currentStreak;
   if (diff === 1) return currentStreak + 1;
@@ -323,94 +320,8 @@ function escapeHtml(str) {
 function generateFriendCode() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = 'FIT-';
-  for (let i = 0; i < 4; i += 1) code += chars[Math.floor(Math.random() * chars.length)];
+  for (let i = 0; i < 4; i += 1) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
   return code;
-}
-
-function animateCount(node, from, to, duration = 280) {
-  if (duration <= 0 || from === to) {
-    node.textContent = String(to);
-    return;
-  }
-
-  const start = performance.now();
-  const diff = to - from;
-
-  function frame(ts) {
-    const p = Math.min(1, (ts - start) / duration);
-    node.textContent = String(Math.round(from + diff * p));
-    if (p < 1) requestAnimationFrame(frame);
-  }
-
-  requestAnimationFrame(frame);
-}
-
-function setupReveal() {
-  const revealNodes = document.querySelectorAll('[data-reveal]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.12 });
-
-  revealNodes.forEach((n) => observer.observe(n));
-}
-
-function setupTilt() {
-  const cards = document.querySelectorAll('[data-tilt]');
-
-  cards.forEach((card) => {
-    card.addEventListener('mousemove', (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const rx = ((y / rect.height) - 0.5) * -6;
-      const ry = ((x / rect.width) - 0.5) * 8;
-      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
-    });
-  });
-}
-
-function setupFxBackground() {
-  const canvas = document.getElementById('fx-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const count = Math.min(100, Math.floor(window.innerWidth / 14));
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.8 + 0.3,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-    }));
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(139, 92, 246, 0.45)';
-
-    particles.forEach((p) => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  draw();
-  window.addEventListener('resize', resize);
 }
